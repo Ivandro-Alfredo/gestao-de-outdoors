@@ -1,0 +1,162 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+	
+}
+
+body{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #C0C0C0;
+    overflow-x: hidden;
+}
+
+nav {
+	position: fixed;
+	min-height: 97%;
+	width: 12%;
+	margin-top: 3.6%;
+	z-index: 99;
+	background-color: #004349;
+}
+
+nav> ul > li > a {
+	text-decoration: none;
+	transition: all 0.3s ease 0;
+	color: #fff;
+}
+
+ul > li > a:hover {
+	color:#00a683 ;
+}
+
+nav>ul>li
+{
+	padding: 1px;
+	margin-top: 1px;
+	font-size: 20px;
+	list-style-type: none;
+}
+li, a, button {
+    font-family: 'Arial', Times, serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 1%;
+	background-color: #004349;
+	
+}
+
+.logo-nav {
+    display: flex;
+    align-items: center;
+	padding: 4px 1%;
+}
+.logo{
+	margin-right: 10px;
+	pointer-events: none;
+	font-size: 18px;
+	color: #fff;
+}
+
+.logo a{
+	color:#00a683
+}
+.login-button {
+	float: right;
+    margin-left: auto; 
+	border: none;
+}
+
+button {
+	margin-inline-start: 1800%;
+    padding: 6px 10px;
+    border-radius: 15px;
+	color: #004349;
+	background-color: #FFFFFF;
+    border: none;
+}
+
+button:hover {
+	color:#00a683 ;
+}
+
+.user{
+	pointer-events: none;
+	color: #fff;
+}
+.botao{
+    margin-bottom: 1%;
+	margin-left: 1%;
+	color: #004349;
+	background-color: #FFFFFF;
+	border: 1px solid #004349;
+}
+
+hr {
+	background-color: #fff;
+}
+
+h2 {
+	color:#fff; 
+	margin:4%;
+	margin-left: 20%;
+	padding: 2%;
+}
+
+#div {
+	position: relative;
+	margin-top: 1%;
+	z-index: 94;
+	background-color: #FFFFFF;
+	width: 87.5%;
+	margin-left: 12.2%;
+}
+
+.thead-dark {
+	background-color: #004349;
+	color: #fff;
+}
+  
+.thead-dark td {
+	font-weight: bold;
+	margin: 2px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+  }
+  
+  td, th {
+	border: 1px solid #ccc;
+  }
+
+#listar {
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+#listar td {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	word-break: break-all;
+}
+
+#listar th,#listar td {
+	width: auto;
+	vertical-align: middle;
+}
+  
+#listar tr {
+	text-align: center;
+}
+

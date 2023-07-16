@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+	
+}
+
+body{
+	min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #C0C0C0;
+    overflow-x: hidden;
+}
+
+nav {
+	position: fixed;
+	min-height: 94%;
+	width: 14%;
+	margin-top: 3.7%;
+	z-index: 99;
+	background-color: #004349;
+}
+
+nav> ul > li > a {
+	text-decoration: none;
+	transition: all 0.3s ease 0;
+	margin-left: 4%;
+	color: #fff;
+}
+
+ul > li > a:hover {
+	color:#00a683 ;
+}
+
+nav>ul>li
+{
+	padding: 1px;
+	font-size: 20px;
+	list-style-type: none;
+}
+
+li, a, button {
+    font-family: 'Arial', Times, serif;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 1%;
+	background-color: #004349;
+	
+}
+
+.logo-nav {
+    display: flex;
+    align-items: center;
+	padding: 4px 1%;
+}
+.logo{
+	margin-right: 10px;
+	pointer-events: none;
+	font-size: 18px;
+	color: #fff;
+}
+
+.logo a{
+	color:#00a683
+}
+
+.login-button {
+	float: right;
+    margin-left: auto; 
+	border: none;
+}
+.user{
+	pointer-events: none;
+	color: #fff;
+}
+button {
+	margin-inline-start: 1800%;
+    padding: 6px 10px;
+    border-radius: 15px;
+	color: #004349;
+	background-color: #FFFFFF;
+    border: none;
+}
+
+button:hover {
+	color:#00a683 ;
+}
+
+button:hover {
+	color:#00a683 ;
+}
+
+.botao{
+    margin-bottom: 1%;
+	margin-left: 1%;
+	color: #004349;
+	background-color: #FFFFFF;
+	border: 1px solid #004349;
+}
+
+.formContainer{
+    position: relative;
+    margin-top: 2.1%;
+    z-index: 94;
+    background-color:#fff;
+    width: 88%;
+    margin-left: 4.7%;
+	padding: 3%;
+}
+
+section {
+	position: fixed;
+	margin-top: 0.2%;
+	z-index: 94;
+	background-color: #C0C0C0;
+	width: 88%;
+	min-height: 92vh;
+	margin-left: 14%;
+}
+
+hr {
+	background-color: #fff;
+}
+
+h2 {
+	color:#fff; 
+	margin: 4%;
+	padding: 2%;
+}
+
+legend{
+    margin-left: 3%;
+	color: #004349;
+}
+
+.valor-pagar{
+	margin-inline-start: 100%;
+	margin-top: -10.5%;
+}
