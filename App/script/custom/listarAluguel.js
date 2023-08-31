@@ -1,5 +1,4 @@
 var userEmail = document.getElementById('email');
-
 window.onload = () => {
 	fetch('../../Controllers/clienteController.php', {
         method: 'POST',
@@ -13,10 +12,8 @@ window.onload = () => {
 			console.log(JSON.stringify(resultado));
 			var tabela = document.querySelector('#listar');
 			tabela.innerHTML = '';
-
 			for (let i = 0; i < resultado.length; i++) {
 				let linha = tabela.insertRow();
-
 				linha.insertCell().innerHTML = resultado[i].nome;
 				linha.insertCell().innerHTML = resultado[i].tipo;
 				linha.insertCell().innerHTML = resultado[i].quantidade;
@@ -28,10 +25,9 @@ window.onload = () => {
 				linha.insertCell().innerHTML = resultado[i].dataFim;
 				linha.insertCell().innerHTML = resultado[i].imagem;
                 linha.insertCell().innerHTML = resultado[i].estado;
-
 			}
 		})
-		.catch((error) => {
+		.catch(() => {
 			alert('Oops!, Requisisao falhou');
 		});
 };

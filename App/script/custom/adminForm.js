@@ -13,11 +13,7 @@ var registar = document.getElementById('registaGestor');
 
 window.onload = () => {
 	const provinciaSelect = document.getElementById('provincia');
-  
-	// Limpar o select de província
 	provinciaSelect.innerHTML = '<option value="" selected>PROVINCIA</option>';
-  
-	// Fazer a requisição para obter as províncias
 	fetch('../../Controllers/localizacaoController.php')
 	  .then(response => response.json())
 	  .then(data => {
@@ -38,22 +34,18 @@ function hablitarMunicipios() {
 	const provinciaSelect = document.getElementById('provincia');
 	const municipioSelect = document.getElementById('municipio');
 	const provinciaSelecionada = provinciaSelect.value;
-
 	if (provinciaSelecionada !== '') {
-		// Habilitar o select de município
 		municipioSelect.disabled = false;
 		carregarMunicipios()
 	} else {
 		municipioSelect.disabled = true;
 	}
 }
-//Carregar o municipio
+
 function carregarMunicipios() {
 	const provinciaSelect = document.getElementById('provincia');
 	const municipioSelect = document.getElementById('municipio');
-
 	municipioSelect.innerHTML = '<option value="" selected>MUNICIPIO</option>';
-
 	fetch('../../Controllers/localizacaoController.php',
 	{
 		method: 'POST',
@@ -73,14 +65,12 @@ function carregarMunicipios() {
 		console.error('Erro ao obter os dados dos municípios:', error);
 	  });
 }
-//
+
 function hablitarComunas() {
 	const municipioSelect = document.getElementById('municipio');
 	const comunaSelect = document.getElementById('comuna');
 	const municipioSelecionado = municipioSelect.value;
-
 	if (municipioSelecionado !== '') {
-		// Habilitar o select de comuna
 		comunaSelect.disabled = false;
 		carregarComunas()
 	} else {
@@ -91,9 +81,7 @@ function hablitarComunas() {
 function carregarComunas() {
 	const municipioSelect = document.getElementById('municipio');
 	const comunaSelect = document.getElementById('comuna');
-  
 	comunaSelect.innerHTML = '<option value="" selected  disabled>COMUNA / DISTRITO URBANO</option>';
-  
 	fetch('../../Controllers/localizacaoController.php',
 	{
 		method:'POST',
@@ -115,11 +103,9 @@ function carregarComunas() {
 }
 
 registar.addEventListener('click', () => {
-
 	if (verificarCamposVazio() === true) {
 		if (validarCampos() === true) {
 			const dadosForm = new FormData();
-			//pegando nos dados do formulario e guardo no dadosforms
 			dadosForm.append('gestor', gestor.value);
 			dadosForm.append('username', username.value);
 			dadosForm.append('email', email.value);
@@ -130,12 +116,12 @@ registar.addEventListener('click', () => {
 			dadosForm.append('municipio', municipio.value);
 			dadosForm.append('comuna', comuna.value);
 			dadosForm.append('nacionalidade', nacionalidade.value);
-				
+
 			fetch('../../Controllers/adminController.php', {
 				method: 'POST',
 				body: dadosForm,
 			})
-			.then((response) => response.text())
+			.then((response) => response.json())
 			.then((data) => {
 				openModal(data);
 			})
@@ -149,37 +135,27 @@ registar.addEventListener('click', () => {
 	} else {
 		openModal('Verifique se não há campos vazios.');
 	}
-
-	
 });
 
 function openModal(outdoor) {
-	// Criar o modal
 	const modal = document.createElement("div");
 	modal.classList.add("modal");
-
 	const modalContent = document.createElement("div");
 	modalContent.classList.add("modal-content");
-
 	const modalHeader = document.createElement("div");
 	modalHeader.classList.add("modal-header");
 	modalHeader.innerHTML = 
 	"<h5 class='modal-title'>Info</h5>"
 	+"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
 	modalContent.appendChild(modalHeader);
-
 	const modalBody = document.createElement("div");
 	modalBody.classList.add("modal-body");
 	modalBody.innerHTML = `
 	<p><strong></strong> ${outdoor}</p>
 	`;
 	modalContent.appendChild(modalBody);
-
 	modal.appendChild(modalContent);
-
-	// Adicionar o modal à página
 	document.body.appendChild(modal);
-	//estilo modal
 	modal.style.display = "block";
 	modal.style.width = "40%";
 	modal.style.marginLeft = "35%";
@@ -187,8 +163,6 @@ function openModal(outdoor) {
 	modalHeader.style.backgroundColor = "#004349";
 	modalHeader.style.color ="#fff";
 	modalBody.style.backgroundColor="#C0C0C0";
-
-	// Fechar o modal ao clicar no botão de fechar
 	const closeButton = modal.querySelector(".close");
 	closeButton.addEventListener("click", function() {
 	document.body.removeChild(modal);
@@ -197,7 +171,6 @@ function openModal(outdoor) {
 
 
 const verificarCamposVazio = () => {
-	
 	const formGestor = [
 		gestor.value,
 		username.value,
@@ -221,7 +194,6 @@ const verificarCamposVazio = () => {
 };
 
 const validarCampos = () => {
-	
 	var testNome=false;
     var testEmail=false;
     var testFone =false ;
@@ -273,8 +245,6 @@ const validarCampos = () => {
 	} 
 };
 
-
-//funcoes para validar
 const validarString = (nome) => {
 	let regExp = /^[a-zA-ZÀ-ÿ\s']*[-]?[a-zA-ZÀ-ÿ\s']*$/;
 	if (regExp.test(nome) == true) {

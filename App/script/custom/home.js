@@ -16,7 +16,6 @@ cancel.addEventListener('click', () => {
 enviar.addEventListener('click', () => {
 	var email = document.getElementById('email');
 	var password = document.getElementById('password');
-	
 	if (verificarCamposVazios(email.value, password.value) === true) {
 		const loginAcess = new FormData();
 		loginAcess.append('email', email.value);
@@ -34,7 +33,6 @@ enviar.addEventListener('click', () => {
 			}else if (data.tipo === 'Gestor'){
 				window.location.href = '../Views/perfil/gestor.php';
 			}else{
-				//fazer outra requisicao para saber se a conta esta na tabela cliente
 				fetch('../Controllers/clienteController.php', {
 					method: 'POST',
 					body: JSON.stringify( ({verificarEmail:email.value})),
@@ -61,42 +59,31 @@ enviar.addEventListener('click', () => {
 
 
 	function openModal(login) {
-		// Criar o modal
 		const modal = document.createElement("div");
 		modal.classList.add("modal");
-	
 		const modalContent = document.createElement("div");
 		modalContent.classList.add("modal-content");
-	
 		const modalHeader = document.createElement("div");
 		modalHeader.classList.add("modal-header");
 		modalHeader.innerHTML = 
 		"<h5 class='modal-title'>Login</h5>"
 		+"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
 		modalContent.appendChild(modalHeader);
-	
 		const modalBody = document.createElement("div");
 		modalBody.classList.add("modal-body");
 		modalBody.innerHTML = `
 		<p><strong></strong> ${login}</p>
 		`;
 		modalContent.appendChild(modalBody);
-	
 		modal.appendChild(modalContent);
-	
-		// Adicionar o modal à página
 		document.body.appendChild(modal);
-		//estilo modal
 		modal.style.display = "block";
-		
 		modal.style.width = "40%";
 		modal.style.marginLeft = "35%";
 		modal.style.marginTop = "10%";
 		modalHeader.style.backgroundColor = "#004349";
 		modalHeader.style.color ="#fff";
 		modalBody.style.backgroundColor="#C0C0C0";
-	
-		// Fechar o modal ao clicar no botão de fechar
 		const closeButton = modal.querySelector(".close");
 		closeButton.addEventListener("click", function() {
 		document.body.removeChild(modal);

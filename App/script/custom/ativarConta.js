@@ -1,4 +1,3 @@
-
 var atualizar = document.getElementById('update');
 
 window.onload = () => {
@@ -9,7 +8,6 @@ window.onload = () => {
 			tabela.innerHTML = '';
 			for (let i = 0; i < resultado.length; i++) {
 				let linha = tabela.insertRow();
-
 				linha.insertCell().innerHTML = resultado[i].nome;
 				linha.insertCell().innerHTML = resultado[i].username;
 				linha.insertCell().innerHTML = resultado[i].email;
@@ -25,7 +23,6 @@ window.onload = () => {
 
 				let cellEstado = linha.insertCell();
 				let estado = resultado[i].estado;
-
 				if (estado === 'pendente') {
 					cellEstado.innerHTML = `
 					<select class="estado" >
@@ -55,7 +52,6 @@ window.onload = () => {
 		});
 };
 
-// fazendo o update, id usado nesse e no outro caso e o id de entrada da tabela
 atualizar.addEventListener('click', () => {
 	var tabela = document.querySelector('#listar');
 	var linhaTabela = tabela.querySelectorAll('tr');
@@ -64,7 +60,6 @@ atualizar.addEventListener('click', () => {
 	Array.from(linhaTabela);
 	linhaTabela.forEach((linha) => {
 		var coluna = linha.querySelectorAll('td');
-
 		let contas = {
 			nome: coluna[0].innerHTML,
 			username: coluna[1].innerHTML,
@@ -81,14 +76,11 @@ atualizar.addEventListener('click', () => {
 		};
 		contasAtualizadas.push(contas)  
 	});
-
 	var newEstado = document.getElementsByClassName('estado');
 	var estados = Array.from(newEstado).map((select) => select.value);
-
 	for (var i = 0; i < contasAtualizadas.length; i++) {
 		contasAtualizadas[i].estado = estados[i];
 	}
-
 	fetch('../../Controllers/ativarContaController.php', {
 		method: 'POST',
 		headers: {
@@ -112,33 +104,25 @@ atualizar.addEventListener('click', () => {
 		openModal(error);
 	});
 
-	function openModal(outdoor) {
-		// Criar o modal
+	function openModal(informacaoModal) {
 		const modal = document.createElement("div");
 		modal.classList.add("modal");
-	
 		const modalContent = document.createElement("div");
 		modalContent.classList.add("modal-content");
-	
 		const modalHeader = document.createElement("div");
 		modalHeader.classList.add("modal-header");
 		modalHeader.innerHTML = 
 		"<h5 class='modal-title'>Relatório</h5>"
 		+"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
 		modalContent.appendChild(modalHeader);
-	
 		const modalBody = document.createElement("div");
 		modalBody.classList.add("modal-body");
 		modalBody.innerHTML = `
-		<p><strong></strong> ${outdoor}</p>
+		<p><strong></strong> ${informacaoModal}</p>
 		`;
 		modalContent.appendChild(modalBody);
-	
 		modal.appendChild(modalContent);
-	
-		// Adicionar o modal à página
 		document.body.appendChild(modal);
-		//estilo modal
 		modal.style.display = "block";
 		modal.style.width = "40%";
 		modal.style.marginLeft = "35%";
@@ -146,8 +130,6 @@ atualizar.addEventListener('click', () => {
 		modalHeader.style.backgroundColor = "#004349";
 		modalHeader.style.color ="#fff";
 		modalBody.style.backgroundColor="#C0C0C0";
-	
-		// Fechar o modal ao clicar no botão de fechar
 		const closeButton = modal.querySelector(".close");
 		closeButton.addEventListener("click", function() {
 		document.body.removeChild(modal);

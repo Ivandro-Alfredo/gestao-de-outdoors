@@ -13,7 +13,6 @@ var comuna = document.forms[0].elements['communa'];
 var password = document.getElementById("senha");
 
 alterar.addEventListener("click", () => {
-// modal.style.display = "block";
     if(passAntiga.value !=''&& passNova.value===''){
         openModal('Confirma a Sua Password, Preenchendo O outro Campo.');
         return;
@@ -38,7 +37,6 @@ alterar.addEventListener("click", () => {
                     municipio: municipio.value,
                     comuna: comuna.value,
                 }
-
                 fetch('../../Controllers/clienteController.php', {
                     method: 'POST',
                     headers: {
@@ -105,39 +103,29 @@ function openModal(info) {
     // Criar o modal
     const modal = document.createElement("div");
     modal.classList.add("modal");
-
     const modalContent = document.createElement("div");
     modalContent.classList.add("modal-content");
-
     const modalHeader = document.createElement("div");
     modalHeader.classList.add("modal-header");
     modalHeader.innerHTML = 
     "<h5 class='modal-title'>Info</h5>"
     +"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
     modalContent.appendChild(modalHeader);
-
     const modalBody = document.createElement("div");
     modalBody.classList.add("modal-body");
     modalBody.innerHTML = `
     <p><strong></strong> ${info}</p>
     `;
     modalContent.appendChild(modalBody);
-
     modal.appendChild(modalContent);
-
-    // Adicionar o modal à página
     document.body.appendChild(modal);
-    //estilo modal
     modal.style.display = "block";
-    
     modal.style.width = "40%";
     modal.style.marginLeft = "35%";
     modal.style.marginTop = "10%";
     modalHeader.style.backgroundColor = "#004349";
     modalHeader.style.color ="#fff";
     modalBody.style.backgroundColor="#C0C0C0";
-
-    // Fechar o modal ao clicar no botão de fechar
     const closeButton = modal.querySelector(".close");
     closeButton.addEventListener("click", function() {
     document.body.removeChild(modal);
@@ -178,7 +166,6 @@ const verificarCamposVazio = () => {
 	    return true;
     }
 
-	//procurando um valor valor vazio
 	for (var l = 0; l < comAlteracaoDeSenha.length; l++) {
         if(comAlteracaoDeSenha[l]===''){
 		    return false
@@ -187,7 +174,6 @@ const verificarCamposVazio = () => {
 	return true;
 };
 
-//codigo para validar compos
 const validarCampos = () => {
     var testNome=false;
     var testFone =false ;
@@ -241,7 +227,6 @@ const validarCampos = () => {
         
 };
 
-//funcoes para validar
 const validarString = (nome) => {
 	let regExp =/^[a-zA-ZÀ-ÿ\s']*[-]?[a-zA-ZÀ-ÿ\s']*$/;
     if (regExp.test(nome) === true) {

@@ -6,7 +6,6 @@ var comuna = document.forms[0].elements['comuna']
 
 window.onload = () => {
   const provinciaSelect = document.getElementById('provincia');
-
   provinciaSelect.innerHTML = '<option value="" selected>PROVINCIA</option>';
   fetch('../../Controllers/localizacaoController.php')
     .then(response => response.json())
@@ -27,7 +26,7 @@ function hablitarMunicipios() {
     const provinciaSelect = document.getElementById('provincia');
     const municipioSelect = document.getElementById('municipio');
     const provinciaSelecionada = provinciaSelect.value;
-  
+
     if (provinciaSelecionada !== '') {
       municipioSelect.disabled = false;
       carregarMunicipios()
@@ -41,7 +40,6 @@ function carregarMunicipios() {
     const municipioSelect = document.getElementById('municipio');
   
     municipioSelect.innerHTML = '<option value="" selected>MUNICIPIO</option>';
-  
     fetch('../../Controllers/localizacaoController.php',
     {
       method: 'POST',
@@ -68,7 +66,6 @@ function hablitarComunas() {
     const municipioSelecionado = municipioSelect.value;
   
     if (municipioSelecionado !== '') {
-      // Habilitar o select de comuna
       comunaSelect.disabled = false;
       carregarComunas()
     } else {
@@ -81,7 +78,6 @@ function carregarComunas() {
     const comunaSelect = document.getElementById('comuna');
     
     comunaSelect.innerHTML = '<option value="" selected  disabled>COMUNA / DISTRITO URBANO</option>';
-    
     fetch('../../Controllers/localizacaoController.php',
     {
       method:'POST',

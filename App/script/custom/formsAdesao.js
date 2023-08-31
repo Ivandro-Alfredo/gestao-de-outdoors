@@ -11,7 +11,6 @@ var comunaCliente = document.forms[0].elements['comuna_cliente'];
 var nacionalidade = document.forms[0].elements['nacionalidade'];
 var tipoCliente = document.forms[0].elements['tipoCliente'];
 var atividade = document.forms[0].elements['atividadeEmpresa'];
-
 var aluguel = document.getElementById('aluguel');
 var modalContainer = document.getElementById('modal-container');
 var login = document.getElementById('loginButton');
@@ -29,11 +28,7 @@ cancel.addEventListener('click', () => {
 
 window.onload = () => {
 	const provinciaSelect = document.getElementById('pCliente');
-  
-	// Limpar o select de província
 	provinciaSelect.innerHTML = '<option value="" selected>PROVINCIA</option>';
-  
-	// Fazer a requisição para obter as províncias
 	fetch('../../Controllers/localizacaoController.php')
 	  .then(response => response.json())
 	  .then(data => {
@@ -54,24 +49,18 @@ function hablitarMunicipios() {
 	const provinciaSelect = document.getElementById('pCliente');
 	const municipioSelect = document.getElementById('mCliente');
 	const provinciaSelecionada = provinciaSelect.value;
-
 	if (provinciaSelecionada !== '') {
-		// Habilitar o select de município
 		municipioSelect.disabled = false;
 		carregarMunicipios()
 	} else {
 		municipioSelect.disabled = true;
 	}
 }
-//Carregar o municipio
+
 function carregarMunicipios() {
 	const provinciaSelect = document.getElementById('pCliente');
 	const municipioSelect = document.getElementById('mCliente');
-	
-	// Limpar o select de municípios
 	municipioSelect.innerHTML = '<option value="" selected>MUNICIPIO</option>';
-  
-	// Fazer a requisição para obter os municípios da província selecionada
 	fetch('../../Controllers/localizacaoController.php',
 	{
 		method: 'POST',
@@ -91,14 +80,12 @@ function carregarMunicipios() {
 		console.error('Erro ao obter os dados dos municípios:', error);
 	  });
 }
-//
+
 function hablitarComunas() {
 	const municipioSelect = document.getElementById('mCliente');
 	const comunaSelect = document.getElementById('cCliente');
 	const municipioSelecionado = municipioSelect.value;
-
 	if (municipioSelecionado !== '') {
-		// Habilitar o select de comuna
 		comunaSelect.disabled = false;
 		carregarComunas()
 	} else {
@@ -109,9 +96,7 @@ function hablitarComunas() {
 function carregarComunas() {
 	const municipioSelect = document.getElementById('mCliente');
 	const comunaSelect = document.getElementById('cCliente');
-  
 	comunaSelect.innerHTML = '<option value="" selected  disabled>COMUNA / DISTRITO URBANO</option>';
-  
 	fetch('../../Controllers/localizacaoController.php',
 	{
 		method:'POST',
@@ -134,7 +119,6 @@ function carregarComunas() {
 
 function verificarCliente(){
 	var cliente = document.getElementById('tipoCliente');
-
 	if(cliente.value==='Empresa' && (cliente.value!=='' && cliente.value!=='Particular')){
 		atividade.disabled = false;
 	}else{
@@ -160,7 +144,6 @@ aluguel.addEventListener('click', () => {
 				dadosForm.append('comuna', comunaCliente.value);
 				dadosForm.append('nacionalidade', nacionalidade.value);
 				dadosForm.append('clienteParticular', tipoCliente.value);
-				//
 				fetch('../../Controllers/solicitacaoControler.php', {
 					method: 'POST',
 					body: dadosForm,
@@ -174,7 +157,6 @@ aluguel.addEventListener('click', () => {
 					});
 			}else{
 				const dadosForm = new FormData();
-				//pegando nos dados do formulario e guardo no dadosforms
 				dadosForm.append('nome', solicitante.value);
 				dadosForm.append('username', username.value);
 				dadosForm.append('email', email.value);
@@ -187,7 +169,6 @@ aluguel.addEventListener('click', () => {
 				dadosForm.append('nacionalidade', nacionalidade.value);
 				dadosForm.append('clienteEmpresa', tipoCliente.value);
 				dadosForm.append('atividade', atividade.value);
-				//
 				fetch('../../Controllers/solicitacaoControler.php', {
 					method: 'POST',
 					body: dadosForm,
@@ -209,7 +190,6 @@ aluguel.addEventListener('click', () => {
 enviar.addEventListener('click', () => {
 	var password = document.getElementById('password');
 	var emailUser = document.getElementById('emailUser');
-	
 	if (verificarDadosDeAcesso(emailUser.value, password.value) === true) {
 		const loginAcess = new FormData();
 		loginAcess.append('email', emailUser.value);
@@ -227,7 +207,6 @@ enviar.addEventListener('click', () => {
 			}else if (data.tipo === 'Gestor'){
 				window.location.href = '../../Views/perfil/gestor.php';
 			}else{
-				//fazer outra requisicao para saber se a conta esta na tabela cliente
 				fetch('http://localhost/Projeto-AW/App/Controllers/clienteController.php', {
 					method: 'POST',
 					body: JSON.stringify( ({verificarEmail:email.value})),
@@ -263,42 +242,31 @@ enviar.addEventListener('click', () => {
 		return true;
 	}
 	function openModalLogin(login) {
-		// Criar o modal
 		const modal = document.createElement("div");
 		modal.classList.add("modal");
-	
 		const modalContent = document.createElement("div");
 		modalContent.classList.add("modal-content");
-	
 		const modalHeader = document.createElement("div");
 		modalHeader.classList.add("modal-header");
 		modalHeader.innerHTML = 
 		"<h5 class='modal-title'>Login</h5>"
 		+"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
 		modalContent.appendChild(modalHeader);
-	
 		const modalBody = document.createElement("div");
 		modalBody.classList.add("modal-body");
 		modalBody.innerHTML = `
 		<p><strong></strong> ${login}</p>
 		`;
 		modalContent.appendChild(modalBody);
-	
 		modal.appendChild(modalContent);
-	
-		// Adicionar o modal à página
 		document.body.appendChild(modal);
-		//estilo modal
 		modal.style.display = "block";
-		
 		modal.style.width = "40%";
 		modal.style.marginLeft = "35%";
 		modal.style.marginTop = "10%";
 		modalHeader.style.backgroundColor = "#004349";
 		modalHeader.style.color ="#fff";
 		modalBody.style.backgroundColor="#C0C0C0";
-	
-		// Fechar o modal ao clicar no botão de fechar
 		const closeButton = modal.querySelector(".close");
 		closeButton.addEventListener("click", function() {
 		document.body.removeChild(modal);
@@ -306,33 +274,25 @@ enviar.addEventListener('click', () => {
 	}
 });
 
-function openModal(outdoor) {
-	// Criar o modal
+function openModal(informacao) {
 	const modal = document.createElement("div");
 	modal.classList.add("modal");
-
 	const modalContent = document.createElement("div");
 	modalContent.classList.add("modal-content");
-
 	const modalHeader = document.createElement("div");
 	modalHeader.classList.add("modal-header");
 	modalHeader.innerHTML = 
 	"<h5 class='modal-title'>Registar - Se</h5>"
 	+"<button type='button' class='close' style='color:#fff' data-dismiss='modal'>&times;</button>";
 	modalContent.appendChild(modalHeader);
-
 	const modalBody = document.createElement("div");
 	modalBody.classList.add("modal-body");
 	modalBody.innerHTML = `
-	<p><strong></strong> ${outdoor}</p>
+	<p><strong></strong> ${informacao}</p>
 	`;
 	modalContent.appendChild(modalBody);
-
 	modal.appendChild(modalContent);
-
-	// Adicionar o modal à página
 	document.body.appendChild(modal);
-	//estilo modal
 	modal.style.display = "block";
 	modal.style.width = "40%";
 	modal.style.marginLeft = "35%";
@@ -340,42 +300,10 @@ function openModal(outdoor) {
 	modalHeader.style.backgroundColor = "#004349";
 	modalHeader.style.color ="#fff";
 	modalBody.style.backgroundColor="#C0C0C0";
-
-	// Fechar o modal ao clicar no botão de fechar
 	const closeButton = modal.querySelector(".close");
 	closeButton.addEventListener("click", function() {
 	document.body.removeChild(modal);
 	});
-}
-
-function limparCampos() {
-	//pega os ids, para limpar os campos...
-	 // Limpar os campos de input
-	 document.getElementById('nomeCliente').value = '';
-	 document.getElementById('user').value = '';
-	 document.getElementById('email').value = '';
-	 document.getElementById('num').value = '';
-	 document.getElementById('endereco').value = '';
-	 
-	 // Redefinir os selects selecionados
-	 document.getElementById('cCliente').selectedIndex = 0;
-	 document.getElementById('mCliente').selectedIndex = 0;
-	 document.getElementById('pCliente').selectedIndex = 0;
-	 document.getElementById('nacionalidade').selectedIndex = 0;
-
-	 //desablitar o select
-	 hablitarComunas()
-	 hablitarMunicipios()
-	 
-	 // Limpar os campos de input restantes
-	 document.getElementById('emp').value = '';
-	 document.getElementById('atividade').value = '';
-   
-	 // Redefinir os selects selecionados restantes
-	 document.getElementById('tipoCliente').selectedIndex = 0;
-	 document.getElementById('cEmpresa').selectedIndex = 0;
-	 document.getElementById('mEmpresa').selectedIndex = 0;
-	 document.getElementById('pEmpresa').selectedIndex = 0;
 }
 
 const verificarCamposVazio = () => {
@@ -430,13 +358,11 @@ const verificarCamposVazio = () => {
 };
 
 const validarCampos = () => {
-	
 	var testNome=false;
     var testEmail=false;
     var testFone =false ;
     var testPassword =false;
     var testUser=false
-
 	if (validarString(solicitante.value) === true) {
         testNome=true
 	}else{
@@ -444,7 +370,6 @@ const validarCampos = () => {
 		+'Ex: Ivandro Alfredo,'+'\n'+' Não deve ter numero nem caracter especial');
 		return null;
 	}
-
     if(validarStrings(username.value) === true) {
          testUser=true
     }else{
@@ -452,14 +377,12 @@ const validarCampos = () => {
 		+'Ex: Ivandro,'+'\n'+' Não deve ter numero nem caracter especial');
 		return null;
 	}
-	
 	if (validarEmail(email.value) === true) {
 		testEmail=true
 	}else{
 		openModal('Email Invalido, introduza um email valido.'+'\n');
 		return null;
 	}
-
 	if (validarTel(fone.value) === true) {
 		testFone=true
 	}else{
@@ -467,7 +390,6 @@ const validarCampos = () => {
 		'Ex +244 956172924 ou 932234567');
 		return null;
 	}
-
 	if ( (password.value!='' && passwordConfirm.value!='')&& (password.value === passwordConfirm.value)) {
 		if(validarPassword(password.value) === true){
             testPassword = true;
@@ -476,12 +398,10 @@ const validarCampos = () => {
 		openModal('Passwords diferentes');
 		return null;
 	}
-
     if((testPassword=== testUser===testEmail===testFone===testNome)===true) {
        return true
 	} 
 };
-
 
 const validarString = (nome) => {
 	let regExp = /^[a-zA-ZÀ-ÿ\s']*[-]?[a-zA-ZÀ-ÿ\s']*$/;
@@ -523,4 +443,3 @@ const validarPassword = (pass) => {
 	openModal('A senha deve ter no mínimo 4 caracteres alfanuméricos.');
 	return false;
 };
-
