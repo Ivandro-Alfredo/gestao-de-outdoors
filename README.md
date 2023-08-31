@@ -1,4 +1,4 @@
-<h1 align="left"> SISTEMA DE GESTÃO DE OUTDORRS </h1>
+<h1 align="left"> SISTEMA DE GESTÃO DE OUTDORS </h1>
 
 <p align="left">
 O sistema é composto por 4 perfis de utilizadores distintos:
